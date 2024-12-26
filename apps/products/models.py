@@ -21,6 +21,7 @@ class Product(models.Model):
     img = models.ImageField(upload_to="product_images")
     supplier = models.ForeignKey(SupplierProfile, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
+    
     def __str__(self):
         return self.name
     
@@ -40,5 +41,5 @@ class ProductInventory(models.Model):
     deleted_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.stock_quantity} {self.unit} of {self.product.name}"
+        return f"{self.stock_quantity} {self.unit} of {self.product.name}" 
     
