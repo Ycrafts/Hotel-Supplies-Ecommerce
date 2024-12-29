@@ -20,6 +20,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    
     def update_total_price(self):
         with transaction.atomic():  # to roll back incase an item is created but the total price is left unupdated
             self.refresh_from_db()
@@ -28,9 +29,9 @@ class Order(models.Model):
                 (item.quantity * item.price_per_unit).quantize(Decimal("0.01")) for item in self.items.all()
             )
             self.save()
-    
     def __str__(self):
-        return f"Order #{self.id} by {self.buyer.company_name} for {self.total_price}"
+        return f"Order #{self.id} by {self.buyer.company_name} - {self.status} for {self.total_price}"
+
 
 class OrderItem(models.Model):
     

@@ -26,3 +26,7 @@ class SupplierReview(models.Model):
 
     def __str__(self):
         return f"{self.supplier.company_name} - {self.rating}/5 by {self.buyer.company_name}"
+
+
+
+#Log auditing and Bidding systems remain
