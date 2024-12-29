@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     #local
     "apps.accounts.apps.AccountsConfig",
     "apps.products.apps.ProductsConfig",
+    "apps.orders.apps.OrdersConfig",
     
 ]
 
@@ -136,4 +137,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 

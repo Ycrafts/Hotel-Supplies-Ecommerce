@@ -10,6 +10,13 @@ class ProductCategory(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Unit(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    symbol = models.CharField(max_length=10, unique=True)
+    
+    def __str__(self):
+        return (self.symbol)
 
     
 class Product(models.Model):
@@ -35,7 +42,7 @@ class ProductInventory(models.Model):
     
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     stock_quantity = models.IntegerField(default=0) #the total amount of that product in the supplier's hands
-    unit = models.CharField(max_length=10, choices=INVENTORY_UNITS)
+    unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
