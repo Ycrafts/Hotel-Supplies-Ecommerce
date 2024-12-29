@@ -30,7 +30,7 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
     
     def __str__(self):
-        return self.name
+        return f"{self.name} from {self.supplier.company_name}"
     
 class ProductInventory(models.Model):
     INVENTORY_UNITS = (
