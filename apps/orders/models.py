@@ -34,7 +34,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    
+
     PLATFORM_SHARE_PERCENTAGE = Decimal("0.1")  # Defined as a class-level constant
 
     order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name="items")
@@ -43,22 +43,21 @@ class OrderItem(models.Model):
     unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
     price_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     platform_share = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
-    supplier_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00) 
+    supplier_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
 
    
     def save(self, *args, **kwargs):
-            # Validate quantity and price
-            if self.quantity <= 0:
+        if self.quantity <= 0:
                 raise ValidationError("Quantity must be greater than zero.")
-            if self.price_per_unit < 0:
+        if self.price_per_unit < 0:
                 raise ValidationError("Price per unit cannot be negative.")
 
-            # calculations for finding supplier and platform share
-            subtotal = Decimal(self.price_per_unit) * Decimal(self.quantity)
-            self.platform_share = (subtotal * self.PLATFORM_SHARE_PERCENTAGE).quantize(Decimal("0.01"))
-            self.supplier_earnings = (subtotal - self.platform_share).quantize(Decimal("0.01"))
-            
-            super().save(*args, **kwargs)
+         # calculations for finding supplier and platform share
+        subtotal = Decimal(self.price_per_unit) * Decimal(self.quantity)
+        self.platform_share = (subtotal * self.PLATFORM_SHARE_PERCENTAGE).quantize(Decimal("0.01"))
+        self.supplier_earnings = (subtotal - self.platform_share).quantize(Decimal("0.01"))
+        
+        super().save(*args, **kwargs)                       
             
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)  

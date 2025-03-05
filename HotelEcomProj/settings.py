@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     "apps.reviews.apps.ReviewsConfig",
     "apps.notifications.apps.NotificationsConfig",
     
+    #3rdparty
+    "rest_framework",
+    "django_extensions",
+    "drf_yasg",
+    
 ]
 
 MIDDLEWARE = [
