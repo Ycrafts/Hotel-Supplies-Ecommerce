@@ -4,7 +4,6 @@ from .models import (
     CustomUser, BuyerProfile, SupplierProfile, Address
 )
 
-
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address

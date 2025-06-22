@@ -20,7 +20,6 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-    
     def update_total_price(self):
         with transaction.atomic():  # to roll back incase an item is created but the total price is left unupdated
             self.refresh_from_db()
@@ -44,7 +43,6 @@ class OrderItem(models.Model):
     price_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     platform_share = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
     supplier_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
-
    
     def save(self, *args, **kwargs):
         if self.quantity <= 0:
