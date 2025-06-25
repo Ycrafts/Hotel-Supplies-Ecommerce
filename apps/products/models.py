@@ -18,7 +18,6 @@ class Unit(models.Model):
     def __str__(self):
         return (self.symbol)
 
-    
 class Product(models.Model):
     name = models.CharField(max_length=255)
     sku = models.CharField(unique=True, max_length=255) #unique identifier for the product filled out by the supplier
@@ -33,13 +32,13 @@ class Product(models.Model):
         return f"{self.name} from {self.supplier.company_name}"
     
 class ProductInventory(models.Model):
-    INVENTORY_UNITS = (
-        ('kg', 'Kilogram'),
-        ('pcs', 'Pieces'),
-        ('ltr', 'Liter'),
-        ('m', 'Meter'),
-    )
-    
+    # INVENTORY_UNITS = (
+    #     ('kg', 'Kilogram'),
+    #     ('pcs', 'Pieces'),
+    #     ('ltr', 'Liter'),
+    #     ('m', 'Meter'),
+    # )
+
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     stock_quantity = models.IntegerField(default=0) #the total amount of that product in the supplier's hands
     unit = models.ForeignKey(Unit, on_delete=models.PROTECT)

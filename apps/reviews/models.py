@@ -14,7 +14,6 @@ class ProductReview(models.Model):
     def __str__(self):
         return f"{self.product.name} - {self.rating}/5 by {self.buyer.company_name}"
 
-
 class SupplierReview(models.Model):
     buyer = models.ForeignKey(BuyerProfile, on_delete=models.CASCADE, related_name="supplier_reviews")
     supplier = models.ForeignKey('accounts.SupplierProfile', on_delete=models.CASCADE, related_name="reviews")

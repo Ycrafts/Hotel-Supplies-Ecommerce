@@ -7,8 +7,8 @@ class CustomUser(AbstractUser):
         ("supplier", "Supplier"),
         ("buyer", "Buyer"),
     )
-    
     role = models.CharField(max_length=10, choices=ROLES)
+
     def __str__(self):
         return f"{self.username} {self.role}"
     
